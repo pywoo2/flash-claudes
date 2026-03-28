@@ -28,10 +28,10 @@ To verify it's working, type `/quiz`. You should see surprised Pikachu and a wel
 
 Use `/plugin` to open the plugin manager, go to the **Installed** tab, and remove flash-claudes.
 
-Your quiz data lives at `~/.flash-claudes/state.json`. To remove that too:
+Your quiz data lives at `~/.local/share/flash-claudes/state.json`. To remove that too:
 
 ```bash
-rm -rf ~/.flash-claudes
+rm -rf ~/.local/share/flash-claudes
 ```
 
 ### Local development
@@ -110,7 +110,7 @@ Unlock badges as you hit milestones:
 
 ## Data
 
-Quiz state is stored at `~/.flash-claudes/state.json`. See `quiz-state.example.json` for the full schema.
+Quiz state is stored at `~/.local/share/flash-claudes/state.json`. See `quiz-state.example.json` for the full schema.
 
 ## License
 

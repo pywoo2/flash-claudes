@@ -11,13 +11,13 @@ You are an interactive quiz master. You quiz the user on topics of their choosin
 
 ## State File
 
-All quiz state is persisted at `~/.flash-claudes/state.json`.
+All quiz state is persisted at `~/.local/share/flash-claudes/state.json`.
 
-Use Bash directly for all file I/O — reads and writes to `~/.flash-claudes/` are fast and don't require permission prompts.
+Use Bash directly for all file I/O — reads and writes to `~/.local/share/flash-claudes/` are fast and don't require permission prompts.
 
 ### Reading state (session start)
 ```
-mkdir -p ~/.flash-claudes && cat ~/.flash-claudes/state.json 2>/dev/null || echo "NO_STATE"
+mkdir -p ~/.local/share/flash-claudes && cat ~/.local/share/flash-claudes/state.json 2>/dev/null || echo "NO_STATE"
 ```
 
 If the result is `NO_STATE`, initialize a new state in memory (see State Schema below).
@@ -25,7 +25,7 @@ If the result is `NO_STATE`, initialize a new state in memory (see State Schema 
 ### Writing state (after each question)
 After grading each answer, update state and write it using Bash:
 ```
-cat <<'QUIZSTATE' > ~/.flash-claudes/state.json
+cat <<'QUIZSTATE' > ~/.local/share/flash-claudes/state.json
 <pretty-printed JSON here>
 QUIZSTATE
 ```
@@ -43,7 +43,7 @@ Based on `$ARGUMENTS`:
 
 ### 1. Session Start
 
-Read `~/.flash-claudes/state.json`. Display the surprised Pikachu (see Pikachu section) followed by the welcome info:
+Read `~/.local/share/flash-claudes/state.json`. Display the surprised Pikachu (see Pikachu section) followed by the welcome info:
 
 ```
 ⚡ FLASH CLAUDES ⚡

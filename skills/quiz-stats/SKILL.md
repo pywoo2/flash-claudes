@@ -8,7 +8,7 @@ allowed-tools: Bash(date *), Bash(cat *), Bash(mkdir *)
 
 Read the quiz state using Bash (not the Read tool) and display a comprehensive stats dashboard:
 ```
-mkdir -p ~/.flash-claudes && cat ~/.flash-claudes/state.json 2>/dev/null || echo "NO_STATE"
+mkdir -p ~/.local/share/flash-claudes && cat ~/.local/share/flash-claudes/state.json 2>/dev/null || echo "NO_STATE"
 ```
 
 If the state file doesn't exist, say:
