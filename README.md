@@ -1,48 +1,25 @@
-# Flash Claudes
+# ⚡ Flash Claudes
 
-An interactive quiz plugin for Claude Code. Pick any topic, answer questions, and level up. Your progress persists between sessions.
+An interactive quiz plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Quiz yourself on any topic, learn from detailed explanations, and level up with XP, streaks, and trophies.
 
-## Prerequisites
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed and working
-
-## Install
-
-1. Open Claude Code
-2. Add the marketplace (one-time):
-   ```
-   /plugin marketplace add pywoo2/flash-claudes
-   ```
-3. Install the plugin:
-   ```
-   /plugin install flash-claudes@flash-claudes
-   ```
-4. Reload plugins:
-   ```
-   /reload-plugins
-   ```
-
-To verify it's working, type `/quiz`. You should see surprised Pikachu and a welcome screen.
-
-### Uninstalling
-
-Use `/plugin` to open the plugin manager, go to the **Installed** tab, and remove flash-claudes.
-
-Your quiz data lives at `~/.local/share/flash-claudes/state.json`. To remove that too:
-
-```bash
-rm -rf ~/.local/share/flash-claudes
-```
-
-### Local development
-
-Clone and install from a local path:
+## Quick Start
 
 ```
-git clone git@github.com:pywoo2/flash-claudes.git
-/plugin marketplace add ./flash-claudes
+/plugin marketplace add pywoo2/flash-claudes
 /plugin install flash-claudes@flash-claudes
+/reload-plugins
 ```
+
+Then type `/quiz` and you're in.
+
+## How It Works
+
+1. **Pick a topic** — anything (Python, SQL, Rust, sleep science, whatever)
+2. **Choose your style** — multiple choice, open-ended, or a mix
+3. **Set your level** — tell it how familiar you are
+4. **Answer questions** — get detailed explanations after every answer
+5. **Ask follow-ups** — dig deeper before moving on (type `n` for next)
+6. **Quit anytime** — type `q` to stop and see your session summary
 
 ## Commands
 
@@ -54,32 +31,37 @@ git clone git@github.com:pywoo2/flash-claudes.git
 | `/quiz stats` | Full stats dashboard |
 | `/quiz-stats` | Standalone stats dashboard |
 
-During a quiz, you can type `s` for stats or `q` to quit at any time.
+During a quiz: `s` for stats, `q` to quit.
 
 ## Features
 
 ### Adaptive Difficulty
-When you start a new topic, you'll be asked how familiar you are — just describe your experience in plain language. The quiz calibrates to your level from there and adapts as you answer.
+Four tiers that adjust based on how you're doing:
 
-Four tiers of difficulty:
-- **Beginner** — Multiple choice, true/false
-- **Intermediate** — Spot the bug, predict the output
-- **Advanced** — Fill-in-the-blank, multi-concept problems
-- **Expert** — Open-ended AI-graded questions (with partial credit), design tradeoffs
-
-At the start of each session, pick your question style: **multiple choice** (click your answer), **open-ended** (type freely), or a **mix** of both.
+| Tier | Question Types |
+|------|---------------|
+| Beginner | Multiple choice, true/false |
+| Intermediate | Spot the bug, predict the output |
+| Advanced | Fill-in-the-blank, multi-concept problems |
+| Expert | Open-ended with partial credit, design tradeoffs |
 
 ### Learn as You Go
-Every answer comes with a detailed explanation. After each question, you can ask follow-up questions to dig deeper before moving on. The quiz waits for you — type `n` or `next` when you're ready to continue.
+Every answer gets a thorough explanation — right or wrong. Ask as many follow-up questions as you want before moving on. This is a learning tool, not just a test.
 
-### Progression
-- **XP & Levels** — Earn XP for every answer (more for harder questions). Level up as you go.
-- **Daily Streaks** — Come back each day to build your streak.
-- **Per-Topic Mastery** — Track accuracy and tier for each topic independently.
-- **Subtopic Weak Spots** — Identifies your weakest areas so you know what to practice.
+### XP & Levels
+Earn XP for every answer. Harder questions = more XP. Streak bonuses kick in at 3+ correct in a row.
+
+### Trophies
+
+Unlock ASCII art trophies as you level up:
+
+```
+🌱 Seedling (Lv 1) → Sprout (Lv 3) → Bronze (Lv 5)
+→ Silver (Lv 10) → Gold (Lv 15) → Diamond (Lv 20)
+→ ★ Legendary (Lv 25+)
+```
 
 ### Achievements
-Unlock badges as you hit milestones:
 
 | Badge | How to unlock |
 |-------|--------------|
@@ -96,21 +78,35 @@ Unlock badges as you hit milestones:
 | Comeback Kid | 3 right after 3 wrong |
 | Renaissance | Play 10 different topics |
 
-### Trophies
+### Daily Streaks
+Play every day to build your streak. Your longest streak is tracked too.
 
-| Level | Trophy |
-|-------|--------|
-| 1 | Seedling |
-| 3 | Sprout |
-| 5 | Bronze Trophy |
-| 10 | Silver Trophy |
-| 15 | Gold Trophy |
-| 20 | Diamond Trophy |
-| 25+ | Legendary |
+### Per-Topic Mastery
+Each topic tracks your tier, correct/attempted count, and subtopic weak spots independently.
+
+## Uninstalling
+
+Open `/plugin` → **Installed** tab → remove flash-claudes.
+
+To also delete your quiz data:
+```bash
+rm -rf ~/.local/share/flash-claudes
+```
+
+## Development
+
+```bash
+git clone git@github.com:pywoo2/flash-claudes.git
+```
+Then in Claude Code:
+```
+/plugin marketplace add ./flash-claudes
+/plugin install flash-claudes@flash-claudes
+```
 
 ## Data
 
-Quiz state is stored at `~/.local/share/flash-claudes/state.json`. See `quiz-state.example.json` for the full schema.
+Quiz state: `~/.local/share/flash-claudes/state.json` — see `quiz-state.example.json` for the schema.
 
 ## License
 
