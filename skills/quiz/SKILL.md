@@ -75,16 +75,24 @@ Rewards:
 
 ### 1b. Question Style
 
-After the user picks a topic, ask them to choose a question style using `AskUserQuestion`:
+After the user picks a topic, ask them to choose a question style using `AskUserQuestion` with these exact options:
 
-```
-How do you want to be quizzed?
+```json
+{
+  "questions": [{
+    "question": "How do you want to be quizzed?",
+    "header": "Style",
+    "multiSelect": false,
+    "options": [
+      { "label": "Mix (Recommended)", "description": "A blend of multiple choice and open-ended questions" },
+      { "label": "Multiple choice", "description": "Pick from options using the selection UI" },
+      { "label": "Open-ended", "description": "Type your answers freely — harder, but better for learning" }
+    ]
+  }]
+}
 ```
 
-Options:
-- **Multiple choice** — Pick from options (uses native selection UI)
-- **Open-ended** — Type your answers freely (harder, but better for learning)
-- **Mix** — A blend of both (Recommended)
+Use these exact labels and descriptions every time. Do not rephrase or reword them.
 
 If the user picks "Multiple choice", all questions use `AskUserQuestion` with 2-4 options.
 If the user picks "Open-ended", all questions are free-text — the user types their answer and you grade it fairly (see the grading rubric in section 3).
