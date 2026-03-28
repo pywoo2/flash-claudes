@@ -1,0 +1,16 @@
+{
+  "name": "flash-claudes",
+  "owner": {
+    "name": "pywoo2"
+  },
+  "metadata": {
+    "description": "Interactive quiz plugin for Claude Code. Pick a topic, answer questions, level up."
+  },
+  "plugins": [
+    {
+      "name": "flash-claudes",
+      "description": "Interactive quiz plugin with XP, levels, streaks, and achievements",
+      "source": "./"
+    }
+  ]
+}
