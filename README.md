@@ -8,35 +8,27 @@ An interactive quiz plugin for Claude Code. Pick any topic, answer questions, an
 
 ## Install
 
-```bash
-claude plugin add pywoo2/flash-claudes
-```
+1. Open Claude Code
+2. Add the marketplace (one-time):
+   ```
+   /plugin marketplace add pywoo2/flash-claudes
+   ```
+3. Install the plugin:
+   ```
+   /plugin install flash-claudes@flash-claudes
+   ```
+4. Reload plugins:
+   ```
+   /reload-plugins
+   ```
 
-That's it. No other dependencies or configuration needed.
-
-To verify it installed correctly, open Claude Code and type:
-
-```
-/quiz
-```
-
-You should see surprised Pikachu and a welcome screen.
-
-### Updating
-
-To pull the latest version:
-
-```bash
-claude plugin update pywoo2/flash-claudes
-```
+To verify it's working, type `/quiz`. You should see surprised Pikachu and a welcome screen.
 
 ### Uninstalling
 
-```bash
-claude plugin remove flash-claudes
-```
+Use `/plugin` to open the plugin manager, go to the **Installed** tab, and remove flash-claudes.
 
-This removes the plugin but keeps your quiz data at `~/.flash-claudes/state.json`. To remove that too:
+Your quiz data lives at `~/.flash-claudes/state.json`. To remove that too:
 
 ```bash
 rm -rf ~/.flash-claudes
@@ -46,9 +38,10 @@ rm -rf ~/.flash-claudes
 
 Clone and install from a local path:
 
-```bash
+```
 git clone git@github.com:pywoo2/flash-claudes.git
-claude plugin add ./flash-claudes
+/plugin marketplace add ./flash-claudes
+/plugin install flash-claudes@flash-claudes
 ```
 
 ## Commands
