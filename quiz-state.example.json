@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "user": {
+    "xp": 1240,
+    "level": 12,
+    "currentStreak": 5,
+    "longestStreak": 11,
+    "lastActiveDate": "2026-03-27",
+    "totalAnswered": 847,
+    "totalCorrect": 614
+  },
+  "topics": {
+    "rust": {
+      "displayName": "Rust",
+      "difficultyScore": 72,
+      "tier": "advanced",
+      "totalAnswered": 142,
+      "totalCorrect": 111,
+      "recentResults": [true, true, false, true, true, true, false, true, true, true, true, false, true, true, true, true, true, false, true, true],
+      "subtopicAccuracy": {
+        "ownership_borrowing": { "correct": 23, "total": 30 },
+        "lifetimes": { "correct": 9, "total": 20 },
+        "pattern_matching": { "correct": 18, "total": 22 },
+        "traits": { "correct": 15, "total": 19 },
+        "error_handling": { "correct": 12, "total": 14 },
+        "concurrency": { "correct": 8, "total": 12 },
+        "iterators": { "correct": 14, "total": 15 },
+        "macros": { "correct": 6, "total": 10 }
+      }
+    },
+    "typescript": {
+      "displayName": "TypeScript",
+      "difficultyScore": 38,
+      "tier": "intermediate",
+      "totalAnswered": 89,
+      "totalCorrect": 58,
+      "recentResults": [true, false, true, true, false, true, true, true, false, true, true, false, true, true, false, true, true, true, true, false],
+      "subtopicAccuracy": {
+        "generics": { "correct": 10, "total": 20 },
+        "type_guards": { "correct": 8, "total": 12 },
+        "utility_types": { "correct": 14, "total": 18 },
+        "declaration_merging": { "correct": 5, "total": 9 },
+        "conditional_types": { "correct": 7, "total": 14 },
+        "async_await": { "correct": 14, "total": 16 }
+      }
+    },
+    "git_internals": {
+      "displayName": "Git internals",
+      "difficultyScore": 12,
+      "tier": "beginner",
+      "totalAnswered": 23,
+      "totalCorrect": 12,
+      "recentResults": [false, true, false, true, true, false, false, true, true, false, true, false, true, false, true, true, false, false, true, false],
+      "subtopicAccuracy": {
+        "objects": { "correct": 4, "total": 8 },
+        "refs": { "correct": 3, "total": 5 },
+        "merge_strategies": { "correct": 2, "total": 5 },
+        "plumbing_commands": { "correct": 3, "total": 5 }
+      }
+    },
+    "sql": {
+      "displayName": "SQL",
+      "difficultyScore": 44,
+      "tier": "intermediate",
+      "totalAnswered": 67,
+      "totalCorrect": 48,
+      "recentResults": [true, true, false, true, false, true, true, false, true, true, true, false, true, false, true, true, true, false, true, true],
+      "subtopicAccuracy": {
+        "joins": { "correct": 12, "total": 15 },
+        "window_functions": { "correct": 8, "total": 14 },
+        "indexing": { "correct": 10, "total": 13 },
+        "subqueries": { "correct": 9, "total": 12 },
+        "transactions": { "correct": 9, "total": 13 }
+      }
+    }
+  },
+  "achievements": [
+    {
+      "id": "first_question",
+      "name": "First Steps",
+      "unlockedAt": "2026-03-01T09:00:00Z"
+    },
+    {
+      "id": "first_perfect",
+      "name": "Flawless",
+      "unlockedAt": "2026-03-10T14:22:00Z"
+    },
+    {
+      "id": "streak_7",
+      "name": "Week Warrior",
+      "unlockedAt": "2026-03-15T11:00:00Z"
+    },
+    {
+      "id": "century",
+      "name": "Century",
+      "unlockedAt": "2026-03-12T16:45:00Z"
+    },
+    {
+      "id": "five_hundred",
+      "name": "Scholar",
+      "unlockedAt": "2026-03-22T10:30:00Z"
+    },
+    {
+      "id": "polyglot",
+      "name": "Polyglot",
+      "unlockedAt": "2026-03-18T09:15:00Z"
+    }
+  ],
+  "sessionState": {
+    "currentTopic": null,
+    "questionNumber": 0,
+    "correctThisRound": 0,
+    "currentSessionStreak": 0,
+    "xpEarnedThisRound": 0
+  }
+}

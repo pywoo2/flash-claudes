@@ -1,0 +1,12 @@
+{
+  "name": "flash-claudes",
+  "description": "An interactive quiz plugin for Claude Code. Pick a topic, answer questions, level up. Progress persists between sessions.",
+  "version": "1.0.0",
+  "author": {
+    "name": "pywoo2"
+  },
+  "skills": [
+    "./skills/quiz",
+    "./skills/quiz-stats"
+  ]
+}
