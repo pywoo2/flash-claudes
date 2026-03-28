@@ -48,8 +48,10 @@ Read `~/.flash-claudes/state.json`. Display the surprised Pikachu (see Pikachu s
 ```
 ⚡ FLASH CLAUDES ⚡
 
+{current trophy art}
 Level {level} — {xp}/{xpToNext} XP
 Streak: {streak} days | Total: {totalAnswered} questions
+Next reward: {nextTrophyName} at Level {nextTrophyLevel}
 
 Pick a topic:
 1. {topic1} ({tier}, {correct}✓ / {answered} attempted)
@@ -64,6 +66,11 @@ Show the surprised Pikachu, then:
 ⚡ FLASH CLAUDES ⚡
 
 Welcome! Type any topic to get started (e.g., "Python", "SQL", "Rust", "Git")
+
+Rewards:
+  🌱 Seedling (Level 1)  →  Sprout (Level 3)  →  Bronze (Level 5)
+  →  Silver (Level 10)  →  Gold (Level 15)  →  Diamond (Level 20)
+  →  ★ Legendary (Level 25+)
 ```
 
 ### 1b. Question Style
