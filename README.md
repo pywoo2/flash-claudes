@@ -2,18 +2,53 @@
 
 An interactive quiz plugin for Claude Code. Pick any topic, answer questions, and level up. Your progress persists between sessions.
 
-## Install
+## Prerequisites
 
-Add to your Claude Code plugins:
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed and working
+
+## Install
 
 ```bash
 claude plugin add pywoo2/flash-claudes
 ```
 
-Or install locally for development:
+That's it. No other dependencies or configuration needed.
+
+To verify it installed correctly, open Claude Code and type:
+
+```
+/quiz
+```
+
+You should see surprised Pikachu and a welcome screen.
+
+### Updating
+
+To pull the latest version:
 
 ```bash
-claude plugin add ./path/to/flash-claudes
+claude plugin update pywoo2/flash-claudes
+```
+
+### Uninstalling
+
+```bash
+claude plugin remove flash-claudes
+```
+
+This removes the plugin but keeps your quiz data at `~/.flash-claudes/state.json`. To remove that too:
+
+```bash
+rm -rf ~/.flash-claudes
+```
+
+### Local development
+
+Clone and install from a local path:
+
+```bash
+git clone git@github.com:pywoo2/flash-claudes.git
+claude plugin add ./flash-claudes
 ```
 
 ## Commands
