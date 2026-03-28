@@ -104,18 +104,30 @@ If the user types `q`, `quit`, `stop`, or `done` at any point during setup, end 
 
 ### 1c. Knowledge Level
 
-After the question style, ask:
+After the question style, ask the user their familiarity using `AskUserQuestion` with these exact options:
 
+```json
+{
+  "questions": [{
+    "question": "How familiar are you with {topic}?",
+    "header": "Level",
+    "multiSelect": false,
+    "options": [
+      { "label": "New to it", "description": "Little to no experience — start from the basics" },
+      { "label": "Some experience", "description": "I know the fundamentals but still learning" },
+      { "label": "Use it regularly", "description": "Comfortable in practice, want to go deeper" },
+      { "label": "Expert", "description": "Deep knowledge — challenge me" }
+    ]
+  }]
+}
 ```
-How familiar are you with {topic}?
-```
 
-Let the user answer in natural language (e.g., "I've used it for years but never deeply", "total beginner", "I know the basics but struggle with async", "pretty advanced, I write it at work daily"). Based on their response, map to an initial `difficultyScore` and tier:
+Use these exact labels and descriptions every time. Do not rephrase or reword them. Map the selection to an initial `difficultyScore` and tier:
 
-- Sounds like no/minimal experience → Beginner (score 10)
-- Sounds like some familiarity / learning → Intermediate (score 35)
-- Sounds like regular practical use → Advanced (score 60)
-- Sounds like deep expertise → Expert (score 85)
+- **New to it** → Beginner (score 10)
+- **Some experience** → Intermediate (score 35)
+- **Use it regularly** → Advanced (score 60)
+- **Expert** → Expert (score 85)
 
 Use this as the **starting point** only. From there, automatic difficulty progression (section 5) takes over and adapts based on actual performance.
 
