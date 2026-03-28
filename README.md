@@ -52,6 +52,7 @@ git clone git@github.com:pywoo2/flash-claudes.git
 | `/quiz <topic>` | Jump straight into a specific topic |
 | `/quiz random` | Random topic from your history (or starter set if new) |
 | `/quiz stats` | Full stats dashboard |
+| `/quiz-stats` | Standalone stats dashboard |
 
 During a quiz, you can type `s` for stats or `q` to quit at any time.
 
@@ -64,7 +65,7 @@ Four tiers of difficulty:
 - **Beginner** — Multiple choice, true/false
 - **Intermediate** — Spot the bug, predict the output
 - **Advanced** — Fill-in-the-blank, multi-concept problems
-- **Expert** — Open-ended AI-graded questions, design tradeoffs
+- **Expert** — Open-ended AI-graded questions (with partial credit), design tradeoffs
 
 At the start of each session, pick your question style: **multiple choice** (click your answer), **open-ended** (type freely), or a **mix** of both.
 
@@ -90,10 +91,22 @@ Unlock badges as you hit milestones:
 | Century | 100 questions answered |
 | Scholar | 500 questions answered |
 | Grandmaster | 1000 questions answered |
-| Polyglot | Intermediate+ in 3 topics |
+| Polyglot | Intermediate or higher in 3+ topics |
 | Deep Dive | Reach Expert in any topic |
 | Comeback Kid | 3 right after 3 wrong |
 | Renaissance | Play 10 different topics |
+
+### Trophies
+
+| Level | Trophy |
+|-------|--------|
+| 1 | Seedling |
+| 3 | Sprout |
+| 5 | Bronze Trophy |
+| 10 | Silver Trophy |
+| 15 | Gold Trophy |
+| 20 | Diamond Trophy |
+| 25+ | Legendary |
 
 ## Data
 

@@ -83,7 +83,9 @@ If the user picks "Multiple choice", all questions use `AskUserQuestion` with 2-
 If the user picks "Open-ended", all questions are free-text — the user types their answer and you grade it fairly (see the grading rubric in section 3).
 If the user picks "Mix", use the format selection rules in section 2 (which vary by tier).
 
-Store the choice in `sessionState.questionStyle` (not persisted to the state file — it's per-session only).
+Store the choice in sessionState.questionStyle. This field is written to the state file along with the rest of sessionState, but is reset at the start of each new session.
+
+If the user types `q`, `quit`, `stop`, or `done` at any point during setup, end the session gracefully.
 
 ### 1c. Knowledge Level
 
@@ -104,6 +106,8 @@ Use this as the **starting point** only. From there, automatic difficulty progre
 
 If the topic already exists in state and has 5+ questions answered, skip this question — their score already reflects their level. Just say: `Picking up where you left off — currently at {tier}.`
 
+If the user types `q`, `quit`, `stop`, or `done` at any point during setup, end the session gracefully.
+
 ### 2. Asking Questions
 
 Ask **one question at a time**. Wait for the user's answer before proceeding.
@@ -121,7 +125,7 @@ Note: `AskUserQuestion` supports 2-4 options. For true/false questions, use 2 op
 - **Advanced** (score 51-75): 40% multiple choice, 30% fill-in-the-blank, 30% spot-the-bug or predict-output
 - **Expert** (score 76-100): 30% multiple choice, 30% fill-in-the-blank, 40% open-ended (you grade the answer)
 
-**Difficulty mix within a round:**
+**Difficulty mix across questions:**
 - 60% questions at the user's current tier
 - 25% one tier below (confidence builders)
 - 15% one tier above (stretch questions)
@@ -160,7 +164,7 @@ Type 'n' for next, or ask me anything about this topic.
 **For open-ended questions:** Grade on a 3-tier scale:
 
 - **Full credit** — Got the core concept right and covered the key details. Count as correct. Award full XP.
-- **Partial credit** — On the right track but missed important parts or had some inaccuracies. Count as 0.5 correct (for `totalCorrect` and `subtopicAccuracy`, add 0.5 instead of 1). Award half XP (rounded up).
+- **Partial credit** — On the right track but missed important parts or had some inaccuracies. Count as 0.5 correct (for `totalCorrect` and `subtopicAccuracy`, add 0.5 instead of 1). Award half XP (rounded up). Partial credit records as 0.5 in recentResults.
 - **Incorrect** — Fundamentally wrong or way off. Count as wrong. Award the "wrong" XP.
 
 Grade fairly — don't inflate scores. If they missed the core concept, that's incorrect even if they got minor details right. Show which parts they got right and which they missed:
@@ -177,6 +181,8 @@ Grade fairly — don't inflate scores. If they missed the core concept, that's i
 ```
 
 **Wait for the user before moving on.** After showing the explanation, do NOT immediately ask the next question. Wait for the user to signal they're ready (e.g., "n", "next", "ok", "go", enter). If the user asks a follow-up question ("why?", "explain more", "what about X?", or any question about the topic), answer it fully and then wait again. The user can ask as many follow-ups as they want. This is a learning tool — the explanation and discussion are the core value, not the score.
+
+IMPORTANT: You MUST end your response after showing feedback. Do NOT generate the next question in the same turn. Wait for the user's next message before proceeding.
 
 ### 4. XP & Scoring
 
@@ -232,6 +238,8 @@ Dropped back to Beginner in {topic}. Keep practicing!
 
 There are no fixed rounds. Questions continue until the user decides to stop by typing `q`, `quit`, `stop`, or `done`.
 
+Typing `s` or `stats` mid-quiz shows the stats dashboard (as defined in the quiz-stats skill), then continues the session — the quiz is not ended.
+
 When the user stops, save state and show a session summary:
 
 ```
@@ -261,7 +269,7 @@ Use `date +%Y-%m-%d` via Bash to get today's date.
 
 ### 8. Achievements
 
-Check and award achievements after each question/round. Achievements are stored in the state file.
+Check and award achievements after each question. Achievements are stored in the state file.
 
 | ID | Name | Condition |
 |----|------|-----------|
@@ -275,13 +283,12 @@ Check and award achievements after each question/round. Achievements are stored 
 | `thousand` | Grandmaster | 1000 total questions answered |
 | `polyglot` | Polyglot | Reach Intermediate in 3+ topics |
 | `deep_dive` | Deep Dive | Reach Expert in any topic |
-| `comeback` | Comeback Kid | Get 3 right after getting 3 wrong in a session |
+| `comeback` | Comeback Kid | Get 3 right after getting 3 wrong in a session (see tracking logic below) |
 | `ten_topics` | Renaissance | Play 10 different topics |
 
-When unlocked, display inline:
-```
-Achievement unlocked: Flawless — Got 10 in a row correct!
-```
+**Comeback Kid tracking:** Track consecutive wrong answers in `sessionState.wrongStreak`. Reset to 0 on a correct answer. When wrongStreak reaches 3, set a flag. If the user then gets 3 correct in a row (tracked via currentSessionStreak), award Comeback Kid.
+
+When unlocked, display using the boxed format defined in the ASCII Art & Personality section (the `┌─── Achievement Unlocked ───┐` box).
 
 ### 9. Subtopic Tracking
 
@@ -305,7 +312,7 @@ This powers the "weak spots" display in stats.
     "longestStreak": 0,
     "lastActiveDate": null,
     "totalAnswered": 0,
-    "totalCorrect": 0
+    "totalCorrect": 0  // May be a float due to partial credit (0.5 per partial answer)
   },
   "topics": {},
   "achievements": [],
@@ -315,7 +322,8 @@ This powers the "weak spots" display in stats.
     "correctThisSession": 0,
     "currentSessionStreak": 0,
     "xpEarnedThisSession": 0,
-    "questionStyle": null
+    "questionStyle": null,
+    "wrongStreak": 0
   }
 }
 ```
@@ -327,13 +335,13 @@ This powers the "weak spots" display in stats.
   "difficultyScore": 0,
   "tier": "beginner",
   "totalAnswered": 0,
-  "totalCorrect": 0,
+  "totalCorrect": 0,  // May be a float due to partial credit (0.5 per partial answer)
   "recentResults": [],
   "subtopicAccuracy": {}
 }
 ```
 
-**`recentResults`** is a rolling array of the last 20 results (true/false) used for trend calculation.
+**`recentResults`** is a rolling array of the last 20 results (true/false/0.5 where 0.5 represents partial credit on open-ended questions) used for trend calculation.
 
 **`subtopicAccuracy`** maps subtopic names to `{ "correct": N, "total": N }`.
 
@@ -348,25 +356,7 @@ This powers the "weak spots" display in stats.
 
 ## Stats Dashboard
 
-When the user passes `stats` as the argument (or types `s` during a quiz), display:
-
-```
-Flash Claudes Stats
-Level {level} — {xp}/{xpToNext} XP
-Streak: {currentStreak} days (best: {longestStreak}) | {totalAnswered} questions answered
-
-Topic           Tier          Correct   Attempted
-------------------------------------------------------
-{topic}         {tier}        {correct}✓   {answered}
-...
-
-Weak spots: {lowest subtopics across all topics}
-
-Achievements: {unlocked} ({count}/{total})
-{list of unlocked achievement names}
-```
-
-**Trend calculation:** Compare accuracy of `recentResults` (last 20) to lifetime accuracy. Show arrow up/down/flat and percentage difference.
+When the user types `s` or `stats`, or passes `stats` as the argument, display the stats dashboard as defined in the quiz-stats skill.
 
 ## Level Trophies
 
@@ -437,6 +427,8 @@ When the user hits a milestone level, display a unique ASCII trophy alongside th
    ★  ╨  ★
   LEGENDARY
 ```
+
+For levels between milestones (e.g., Level 2, Level 7), display the most recently earned trophy.
 
 On the welcome screen, show the user's current trophy next to their level info. When a new trophy is earned, display it large with a congratulations message:
 

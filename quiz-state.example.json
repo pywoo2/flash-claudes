@@ -2,12 +2,12 @@
   "version": 1,
   "user": {
     "xp": 1240,
-    "level": 12,
+    "level": 6,
     "currentStreak": 5,
     "longestStreak": 11,
     "lastActiveDate": "2026-03-27",
     "totalAnswered": 847,
-    "totalCorrect": 614
+    "totalCorrect": 614.5
   },
   "topics": {
     "rust": {
@@ -86,6 +86,11 @@
       "unlockedAt": "2026-03-10T14:22:00Z"
     },
     {
+      "id": "streak_3",
+      "name": "Hat Trick",
+      "unlockedAt": "2026-03-08T10:00:00Z"
+    },
+    {
       "id": "streak_7",
       "name": "Week Warrior",
       "unlockedAt": "2026-03-15T11:00:00Z"
@@ -109,8 +114,10 @@
   "sessionState": {
     "currentTopic": null,
     "questionNumber": 0,
-    "correctThisRound": 0,
+    "correctThisSession": 0,
     "currentSessionStreak": 0,
-    "xpEarnedThisRound": 0
+    "wrongStreak": 0,
+    "xpEarnedThisSession": 0,
+    "questionStyle": null
   }
 }
