@@ -211,6 +211,29 @@ Grade fairly — don't inflate scores. If they missed the core concept, that's i
 
 IMPORTANT: You MUST end your response after showing feedback. Do NOT generate the next question in the same turn. Wait for the user's next message before proceeding.
 
+### 3b. State Updates After Each Answer
+
+Immediately after grading, update all of these in memory (then save to disk):
+
+1. `user.totalAnswered` += 1
+2. `user.totalCorrect` += 1 (correct), 0.5 (partial), or 0 (wrong)
+3. `user.xp` += XP earned (see section 4)
+4. `user.level` — recalculate based on new XP (see level thresholds in section 4)
+5. `topics[topic].totalAnswered` += 1
+6. `topics[topic].totalCorrect` += 1, 0.5, or 0
+7. `topics[topic].recentResults` — append true, 0.5, or false (keep last 20, drop oldest)
+8. `topics[topic].subtopicAccuracy[subtopic].total` += 1
+9. `topics[topic].subtopicAccuracy[subtopic].correct` += 1, 0.5, or 0
+10. `topics[topic].difficultyScore` — update per section 5
+11. `sessionState.questionNumber` += 1
+12. `sessionState.correctThisSession` += 1, 0.5, or 0
+13. `sessionState.xpEarnedThisSession` += XP earned
+14. `sessionState.currentSessionStreak` += 1 (correct) or reset to 0 (wrong/partial)
+15. `sessionState.wrongStreak` — update per Comeback Kid logic (section 8)
+16. Check for achievements (section 8)
+
+Then save the full state to disk using the Bash heredoc (section 10).
+
 ### 4. XP & Scoring
 
 **XP per question (by difficulty of the specific question):**
