@@ -30,11 +30,18 @@ During a quiz, you can type `s` for stats or `q` to quit at any time.
 ## Features
 
 ### Adaptive Difficulty
-Questions scale with your skill. Each topic progresses through four tiers:
+When you start a new topic, you'll be asked how familiar you are — just describe your experience in plain language. The quiz calibrates to your level from there and adapts as you answer.
+
+Four tiers of difficulty:
 - **Beginner** — Multiple choice, true/false
 - **Intermediate** — Spot the bug, predict the output
 - **Advanced** — Fill-in-the-blank, multi-concept problems
 - **Expert** — Open-ended AI-graded questions, design tradeoffs
+
+At the start of each session, pick your question style: **multiple choice** (click your answer), **open-ended** (type freely), or a **mix** of both.
+
+### Learn as You Go
+Every answer comes with a detailed explanation. After each question, you can ask follow-up questions to dig deeper before moving on. The quiz waits for you — type `n` or `next` when you're ready to continue.
 
 ### Progression
 - **XP & Levels** — Earn XP for every answer (more for harder questions). Level up as you go.
@@ -48,7 +55,7 @@ Unlock badges as you hit milestones:
 | Badge | How to unlock |
 |-------|--------------|
 | First Steps | Answer your first question |
-| Flawless | 10/10 in a round |
+| Flawless | 10 in a row correct |
 | Hat Trick | 3-day streak |
 | Week Warrior | 7-day streak |
 | Monthly Master | 30-day streak |
@@ -62,7 +69,7 @@ Unlock badges as you hit milestones:
 
 ## Data
 
-Quiz state is stored at `~/.claude/quiz/state.json`. See `quiz-state.example.json` for the full schema.
+Quiz state is stored at `~/.flash-claudes/state.json`. See `quiz-state.example.json` for the full schema.
 
 ## License
 

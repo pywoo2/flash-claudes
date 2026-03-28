@@ -1,12 +1,15 @@
 ---
 name: quiz-stats
 description: Display your Flash Claudes quiz stats dashboard — levels, streaks, per-topic accuracy, weak spots, and achievements.
-allowed-tools: Read, Bash(date *), Bash(cat *)
+allowed-tools: Bash(date *), Bash(cat *), Bash(mkdir *)
 ---
 
 # Flash Claudes — Stats Dashboard
 
-Read the quiz state from `~/.claude/quiz/state.json` and display a comprehensive stats dashboard.
+Read the quiz state using Bash (not the Read tool) and display a comprehensive stats dashboard:
+```
+mkdir -p ~/.flash-claudes && cat ~/.flash-claudes/state.json 2>/dev/null || echo "NO_STATE"
+```
 
 If the state file doesn't exist, say:
 ```
@@ -18,28 +21,32 @@ No quiz data yet! Run /flash-claudes:quiz to get started.
 Display the following:
 
 ```
-========================================
-        FLASH CLAUDES STATS
-========================================
+    ⚡ FLASH CLAUDES ⚡
+    ╭─────────────────╮
+    │  (◕‿◕) Stats!   │
+    ╰─────────────────╯
+
+{current trophy art}
 
 Level {level} — {xp}/{xpToNext} XP
 [{progressBar}] {pct}% to next level
+Next trophy: Level {nextTrophyLevel} ({trophyName})
 
 Streak: {currentStreak} days (best: {longestStreak})
-Total: {totalAnswered} questions | {totalCorrect} correct ({overallAccuracy}%)
+Total: {totalCorrect}✓ / {totalAnswered} attempted
 
 TOPICS
---------------------------------------------------------------
-Topic           Tier          Accuracy   Answered   Trend
---------------------------------------------------------------
-{topic}         {tier}        {pct}%     {count}    {arrow} {delta}%
+------------------------------------------------------
+Topic           Tier          Correct   Attempted
+------------------------------------------------------
+{topic}         {tier}        {correct}✓   {answered}
 ...
---------------------------------------------------------------
+------------------------------------------------------
 
 WEAK SPOTS
-- {subtopic} in {topic}: {accuracy}% ({correct}/{total})
-- {subtopic} in {topic}: {accuracy}% ({correct}/{total})
-- {subtopic} in {topic}: {accuracy}% ({correct}/{total})
+- {subtopic} in {topic}: {correct}✓ / {total} attempted
+- {subtopic} in {topic}: {correct}✓ / {total} attempted
+- {subtopic} in {topic}: {correct}✓ / {total} attempted
 
 ACHIEVEMENTS ({unlocked}/{total})
 {achieved} {name} — {description}
@@ -60,11 +67,6 @@ ACHIEVEMENTS ({unlocked}/{total})
 
 **Progress bar:** 20-character bar using filled/empty blocks, e.g., `[============--------]`
 
-**Trend:** Compare accuracy of `recentResults` (last 20 answers) to lifetime accuracy for each topic.
-- If recent > lifetime by 3%+: up arrow + green delta
-- If recent < lifetime by 3%+: down arrow + red delta
-- Otherwise: flat arrow
-
 **Weak spots:** Find the 3 subtopics with the lowest accuracy (minimum 5 questions answered in that subtopic to qualify). If fewer than 3 qualify, show however many do.
 
 **Achievements list:**
@@ -73,7 +75,7 @@ Show unlocked achievements first (with unlock date), then locked ones with their
 | ID | Name | Condition |
 |----|------|-----------|
 | `first_question` | First Steps | Answer your first question |
-| `first_perfect` | Flawless | Get 10/10 in a round |
+| `first_perfect` | Flawless | Get 10 in a row correct |
 | `streak_3` | Hat Trick | 3-day streak |
 | `streak_7` | Week Warrior | 7-day streak |
 | `streak_30` | Monthly Master | 30-day streak |
